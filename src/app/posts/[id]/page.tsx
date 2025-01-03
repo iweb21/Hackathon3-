@@ -3,6 +3,7 @@ import React from "react";
 import CommentSection from "@/components/CommentSection";
 import Footer from "@/components/Footer";
 import AuthoreCard from "@/components/AuthoreCard";
+import Image from "next/image";
 
 const posts = [
   {
@@ -180,11 +181,11 @@ export default function Post({ params }: PostProps) {
       </h1>
 
       {post.image && (
-        <img
-          src={post.image}
-          alt={post.title}
-          className="w-full h-auto rounded-md mt-4"
-        />
+ <Image 
+        
+        src={post.image} alt={post.title} 
+        height={200}
+        width={300}/>
       )}
       <div className="mt-6 text-lg text-slate-700">
         {renderParagraphs(post.description)}
