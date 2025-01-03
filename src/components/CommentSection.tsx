@@ -127,7 +127,7 @@ interface Comment {
 }
 
 interface CommentSectionProps {
-  postId: string;
+  postId: string; // postId is now used
 }
 
 export default function CommentSection({ postId }: CommentSectionProps) {
@@ -136,6 +136,7 @@ export default function CommentSection({ postId }: CommentSectionProps) {
   const [authorName, setAuthorName] = useState("");
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
 
+  // Add a comment (using postId context here)
   const handleAddComment = () => {
     if (newComment.trim() && authorName.trim()) {
       const newCommentObj: Comment = {
@@ -143,6 +144,8 @@ export default function CommentSection({ postId }: CommentSectionProps) {
         author: authorName,
         text: newComment,
       };
+
+      // You may want to persist or fetch comments from an API with postId in the future
       setComments([...comments, newCommentObj]);
       setNewComment("");
       setAuthorName("");
@@ -174,6 +177,7 @@ export default function CommentSection({ postId }: CommentSectionProps) {
 
   return (
     <div className="mt-8">
+      {/* Displaying postId to show which post the comments belong to */}
       <h2 className="text-2xl font-semibold">Comments for Post {postId}</h2>
       <div className="mt-4 space-y-4">
         {comments.length > 0 ? (
@@ -184,7 +188,7 @@ export default function CommentSection({ postId }: CommentSectionProps) {
                 <p>{comment.text}</p>
                 <Button
                   onClick={() => handleEditComment(comment.id)}
-                  className="mt-2 text-blue-500" 
+                  className="mt-2 text-blue-500"
                   asChild={false}
                 >
                   Edit
@@ -222,7 +226,7 @@ export default function CommentSection({ postId }: CommentSectionProps) {
               handleAddComment();
             }
           }}
-          className="mt-4" 
+          className="mt-4"
           asChild={false}
         >
           {editingCommentId ? "Save" : "Submit"}
@@ -231,6 +235,3 @@ export default function CommentSection({ postId }: CommentSectionProps) {
     </div>
   );
 }
-
-
-
